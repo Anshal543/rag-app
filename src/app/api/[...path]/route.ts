@@ -1,21 +1,34 @@
 // app/api/[...path]/route.js
-export async function GET(request, { params }) {
+interface ApiRequestParams {
+  params: {
+    path: string[];
+  };
+}
+
+interface HandleApiRequestParams {
+  path: string[];
+}
+
+export async function GET(
+  request: Request,
+  { params }: ApiRequestParams
+): Promise<Response> {
   return handleApiRequest(request, params);
 }
 
-export async function POST(request, { params }) {
+export async function POST(request: Request, { params }: ApiRequestParams) {
   return handleApiRequest(request, params);
 }
 
-export async function PUT(request, { params }) {
+export async function PUT(request: Request, { params }: ApiRequestParams) {
   return handleApiRequest(request, params);
 }
 
-export async function DELETE(request, { params }) {
+export async function DELETE(request: Request, { params }: ApiRequestParams) {
   return handleApiRequest(request, params);
 }
 
-async function handleApiRequest(request, { path }) {
+async function handleApiRequest(request: Request, { path }: HandleApiRequestParams) {
   const apiUrl = `${process.env.BACKEND_URL}/${path.join('/')}`;
   // const authHeader = request.headers.get('Authorization');
   
