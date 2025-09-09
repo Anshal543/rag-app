@@ -281,7 +281,7 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { useUser, useAuth } from "@clerk/nextjs";
 import { Menu } from "lucide-react";
 import Header from "../components/Header";
@@ -335,8 +335,9 @@ export default function Home() {
     return null; // Will redirect via useEffect
   }
 
-  const handleFileUpload = async (e) => {
-    const file = e.target.files[0];
+  const handleFileUpload = async (e:ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    const file = files && files[0];
     if (!file) return;
 
     setUploading(true);

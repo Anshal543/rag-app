@@ -136,15 +136,21 @@
 // components/ChatInterface.js
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, FormEvent } from 'react';
+
+type Message = {
+  role: string;
+  content: string;
+  contexts?: { source: string; text: string }[];
+};
 
 export default function ChatInterface() {
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<Message[]>([
     { role: 'assistant', content: 'Hello! I\'m your RAG-powered FAQ assistant' }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const messagesEndRef = useRef(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -154,7 +160,7 @@ export default function ChatInterface() {
     scrollToBottom();
   }, [messages]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!input.trim() || loading) return;
 
@@ -208,7 +214,7 @@ export default function ChatInterface() {
             }`}>
               {message.content}
               
-              {message.contexts && message.contexts.length > 0 && (
+              {message?.contexts && message.contexts.length > 0 && (
                 <div className="mt-2 text-sm">
                   <p className="opacity-80">
                     📚 Found {message.contexts.length} relevant documents

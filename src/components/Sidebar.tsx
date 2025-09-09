@@ -128,6 +128,22 @@
 import { useState } from 'react';
 import { Home, Settings, BarChart, X } from 'lucide-react';
 
+
+// types/sidebar.ts
+export interface SidebarProps {
+  activeTab: string;
+  onTabChange: (tab: string) => void;
+  stats: {
+    total_vector_count: number;
+  };
+  onUploadSuccess?: () => void;
+  onWipeSuccess?: () => void;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+
+
 export default function Sidebar({ 
   activeTab, 
   onTabChange, 
@@ -136,67 +152,12 @@ export default function Sidebar({
   onWipeSuccess,
   isOpen,
   onClose 
-}:any) {
+}: SidebarProps) {
   const [uploading, setUploading] = useState(false);
   const [wipeConfirm, setWipeConfirm] = useState(false);
   const [uploadMessage, setUploadMessage] = useState('');
 
-  const   handleFileUpload = async (e:any) => {
-    const file = e.target.files[0];
-    if (!file) return;
 
-    setUploading(true);
-    setUploadMessage('');
-
-    try {
-      // const token = localStorage.getItem('authToken');
-      const formData = new FormData();
-      formData.append('file', file);
-
-      const response = await fetch('/api/upload-csv', {
-        method: 'POST',
-        headers: {
-          // 'Authorization': `Basic ${token}`
-        },
-        body: formData
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setUploadMessage(data.message);
-        onUploadSuccess();
-      } else {
-        throw new Error('Upload failed');
-      }
-    } catch (error) {
-      setUploadMessage('Error uploading file');
-    } finally {
-      setUploading(false);
-    }
-  };
-
-  const handleWipeDatabase = async () => {
-    if (!wipeConfirm) {
-      setWipeConfirm(true);
-      return;
-    }
-
-    try {
-      const response = await fetch('/api/wipe-database', {
-        method: 'DELETE',
-      });
-
-      if (response.ok) {
-        onWipeSuccess();
-        setWipeConfirm(false);
-        alert('Database wiped successfully!');
-      } else {
-        throw new Error('Wipe failed');
-      }
-    } catch (error) {
-      alert('Error wiping database');
-    }
-  };
 
   const tabs = [
     { id: 'home', label: 'Home', icon: Home },

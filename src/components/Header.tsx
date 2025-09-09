@@ -4,6 +4,7 @@
 import { useUser, UserButton } from '@clerk/nextjs';
 import { useTheme } from './ThemeProvider';
 import { Sun, Moon } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Header() {
   const { isSignedIn } = useUser();
@@ -31,12 +32,12 @@ export default function Header() {
         {isSignedIn ? (
           <UserButton />
         ) : (
-          <a
+          <Link
             href="/sign-in"
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors"
           >
             Login
-          </a>
+          </Link>
         )}
       </div>
     </header>
