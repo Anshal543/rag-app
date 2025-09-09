@@ -1,0 +1,83 @@
+/* styles/Sidebar.module.css */
+.sidebar {
+  width: 300px;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-right: 1px solid #dee2e6;
+  overflow-y: auto;
+}
+
+.sidebarSection {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.authenticated {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.logoutButton {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.statsBox {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.uploadButton {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.uploadButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.wipeButton {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.wipeConfirmButton {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.error {
+  color: #dc3545;
+  margin-top: 0.5rem;
+}
+
+.success {
+  color: #28a745;
+  margin-top: 0.5rem;
+}
